@@ -99,7 +99,7 @@ class SerializingSocket(zmq.Socket):
           A: numpy array or OpenCV image reconstructed with dtype and shape.
         """
         log("Array")
-        log(A)
+        log(*A)
         md = self.recv_json(flags=flags)
         msg = self.recv(flags=flags, copy=copy, track=track)
         A = np.frombuffer(msg, dtype=md['dtype'])
@@ -121,7 +121,7 @@ class SerializingSocket(zmq.Socket):
           data: bytestring, containing data.
         """
         log("Data")
-        log(data)
+        log(*data)
         md = self.recv_json(flags=flags)  # metadata text
         data = self.recv(flags=flags, copy=copy, track=track)
         return (md['msg'], data)
